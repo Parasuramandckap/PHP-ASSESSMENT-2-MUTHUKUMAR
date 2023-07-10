@@ -1,3 +1,6 @@
+<?php
+    $data = $_POST["database"];
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,13 +11,19 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="post">
-        <select>
+    <form method="post" >
+        <select name="database" id="db" onchange="this.value">
             <?php foreach ($allDB as $allDBs):?>
-                <option onchange="<?php $name =new UserModel();?>"><?php echo $allDBs["Database"]?></option>
+                <option ><?php echo $allDBs["Database"]?></option>
             <?php endforeach;?>
         </select>
+        <h1 id="h1"></h1>
         <?php
+        $htmlEle = "<select id='db'></select>";
+        $domdoc = new DOMDocument();
+        $domdoc->loadHTML($htmlEle);
+
+        $table = $domdoc->getElementById('h1')->nodeValue;
             $query = new UserModel();
            $result = $query->database->query("SHOW TABLES from a2d");
            $result =$result->fetchAll(PDO::FETCH_ASSOC);
@@ -28,8 +37,14 @@
             ?>
         </select>
             <?php endif ?>
-
-
+        <div id="container"></div>
     </form>
+
+    <script>
+        document.querySelector("#db").addEventListener("change",(e)=>{
+            document.querySelector("h1").innerText = e.target.value;
+        })
+    </script>
+
 </body>
 </html>

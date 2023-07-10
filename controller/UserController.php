@@ -30,6 +30,9 @@ class UserController{
         $allDB = $this->userModel->getDatabase();
         require "views/user/addRecord/addRecord.php";
     }
+    public function sample($data){
+        print_r($data);
+    }
 
 
 }

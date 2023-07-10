@@ -16,6 +16,10 @@ $controller->post("/add-row","add-row");
 $controller->route();
 
 
+//echo "<pre>";
+//print_r($_SERVER['PHP_SELF']);
+//echo "</pre>";
+
 
 
 
