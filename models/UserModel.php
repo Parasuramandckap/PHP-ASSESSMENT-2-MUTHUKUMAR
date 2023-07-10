@@ -17,17 +17,17 @@ class UserModel extends database {
         $coulmnName = $tableData["column-name"];
         $dataType = $tableData["data-type"];
 
-//        $this->database->query("
-//            USE $databaseName;
-//            create table $tableName(
-//                id int not null AUTO_INCREMENT,
-//                $coulmnName $dataType,
-//                primary key(id)
-//            );
-//        ");
-//
-//        echo "stored data";
+        $this->database->query("
+            USE $databaseName;
+            create table $tableName(
+                id int not null AUTO_INCREMENT,
+                $coulmnName $dataType,
+                primary key(id)
+            );
+        ");
+        header("location:/");
     }
+
 
 }
 

@@ -27,9 +27,9 @@ class UserController{
         $this->userModel->creationTable($tableData);
     }
     public function showRecordForm(){
-       $databae = $this->userModel->getDatabase();
-
+        $allDB = $this->userModel->getDatabase();
         require "views/user/addRecord/addRecord.php";
     }
+
 
 }

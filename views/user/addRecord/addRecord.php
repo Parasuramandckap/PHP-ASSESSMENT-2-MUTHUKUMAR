@@ -1,8 +1,3 @@
-<?php
-    require "models/UserModel.php";
-    $new = new UserModel();
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,40 +8,28 @@
     <title>Document</title>
 </head>
 <body>
-    <form>
-        <div>
-            <label>Database Name</label>
-            <select onchange="main(this.value)">
-                <?php foreach ($databae as $databaes): ?>
-                    <option><?php  echo $databaes["Database"]?></option>
-                <?php endforeach;?>
-            </select>
-        </div>
-        <div>
-            <label>table name</label>
-            <?php ?>
-        </div>
+    <form method="post">
+        <select>
+            <?php foreach ($allDB as $allDBs):?>
+                <option onchange="<?php $name =new UserModel();?>"><?php echo $allDBs["Database"]?></option>
+            <?php endforeach;?>
+        </select>
+        <?php
+            $query = new UserModel();
+           $result = $query->database->query("SHOW TABLES from a2d");
+           $result =$result->fetchAll(PDO::FETCH_ASSOC);
+            if($result):
+        ?>
+        <select>
+            <?php
+                foreach ($result as $results){
+                    echo '<option value="', $results['Tables_in_a2d'], '">', $results['Tables_in_a2d'], '</option>';
+                }
+            ?>
+        </select>
+            <?php endif ?>
+
+
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script type="text/javascript">
-
-        function main(value) {
-
-        }
-        // function load_page(pages){
-        //     let xhr = new XMLHttpRequest();
-        //     xhr.onload =  function () {
-        //         if (this.status == 200 && this.readyState == 4){
-        //             container.innerText = xhr.responseText;
-        //         }
-        //         else{
-        //             console.warn("somting error");
-        //         }
-        //     }
-        //     xhr.open("get",pages)
-        //     xhr.send();
-        // }
-
-    </script>
 </body>
 </html>

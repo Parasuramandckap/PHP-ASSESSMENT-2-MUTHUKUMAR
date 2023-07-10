@@ -44,7 +44,7 @@
         <div class="filed1">
 
         </div>
-        <button id="addmore" type="button">add-more</button>
+<!--        <button id="addmore" type="button">add-more</button>-->
         <br>
         <button type="submit">create table</button>
     </form>
