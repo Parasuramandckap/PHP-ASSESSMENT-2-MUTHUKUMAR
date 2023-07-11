@@ -24,14 +24,22 @@ class UserController{
 
     }
     public function createTable($tableData){
-        $this->userModel->creationTable($tableData);
+
+         $dbname = $tableData["database"];
+         $tableName = $tableData["table-name"];
+         $columnName = $tableData["clounm-name"];
+         $datatype = $tableData["data-type"];
+        $this->userModel->creationTable($dbname,$tableName,$columnName,$datatype);
     }
     public function showRecordForm(){
+
+
         $allDB = $this->userModel->getDatabase();
         require "views/user/addRecord/addRecord.php";
+
     }
-    public function sample($data){
-        print_r($data);
+    public function sample(){
+        require "views/user/addRecord/addRecord.php";
     }
 
 

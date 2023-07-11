@@ -1,5 +1,4 @@
 <?php
-    $data = $_POST["database"];
 ?>
 <!doctype html>
 <html lang="en">
@@ -8,43 +7,39 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../jquery-1.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <title>Document</title>
-</head>
-<body>
-    <form method="post" >
-        <select name="database" id="db" onchange="this.value">
-            <?php foreach ($allDB as $allDBs):?>
-                <option ><?php echo $allDBs["Database"]?></option>
-            <?php endforeach;?>
-        </select>
-        <h1 id="h1"></h1>
-        <?php
-        $htmlEle = "<select id='db'></select>";
-        $domdoc = new DOMDocument();
-        $domdoc->loadHTML($htmlEle);
-
-        $table = $domdoc->getElementById('h1')->nodeValue;
-            $query = new UserModel();
-           $result = $query->database->query("SHOW TABLES from a2d");
-           $result =$result->fetchAll(PDO::FETCH_ASSOC);
-            if($result):
-        ?>
-        <select>
-            <?php
-                foreach ($result as $results){
-                    echo '<option value="', $results['Tables_in_a2d'], '">', $results['Tables_in_a2d'], '</option>';
-                }
-            ?>
-        </select>
-            <?php endif ?>
-        <div id="container"></div>
-    </form>
-
     <script>
-        document.querySelector("#db").addEventListener("change",(e)=>{
-            document.querySelector("h1").innerText = e.target.value;
+        $(document).ready(function () {
+            $("#db").change(function () {
+                let name = $("#db").val();
+                $.ajax({
+                    url:"index.php",
+                    method:"POST",
+                    data:"database"+name
+                }).done(function (database) {
+                    console.log(database)
+                })
+            })
         })
     </script>
+</head>
+<body>
+    <form method="post">
+        <div>
+            <label>databse</label>
+            <select name="database" id="db">
+                <?php foreach ($allDB as $allDBs):?>
+                    <option ><?php echo $allDBs["Database"]?></option>
+                <?php endforeach;?>
+            </select>
+            <h1 id="demo"></h1>
+        </div>
+    <h1><?php require "views/user/action.php"?></h1>
+    </form>
+
+
 
 </body>
 </html>

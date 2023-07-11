@@ -13,6 +13,8 @@ $controller->post("/create-table","create-table");
 //add record or row
 $controller->post("/add-row","add-row");
 
+$controller->post("/sample","sample");
+
 $controller->route();
 
 
