@@ -51,6 +51,7 @@ class UserController{
         $tableData =  $this->userModel->getRow($databaseName,$tableName);
         echo json_encode($tableData);
 
+
     }
 
 }

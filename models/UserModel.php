@@ -33,14 +33,10 @@ class UserModel extends database {
     }
 
     public function getTable($datbaseName){
-      return $this->database->query("SELECT TABLE_NAME AS tablesname,TABLE_SCHEMA FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$datbaseName';")->fetchAll(PDO::FETCH_OBJ);
-
+      return $this->database->query("SELECT TABLE_NAME AS tablesname,TABLE_SCHEMA FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='$datbaseName'")->fetchAll(PDO::FETCH_OBJ);
     }
     public function getRow($database,$tableName){
-
-        $row = $this->database->query("SELECT column_name as columns FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='$database' AND `TABLE_NAME`='$tableName'");
-        $row = $row->fetchAll(PDO::FETCH_OBJ);
-        return $row;
+        return $this->database->query("SELECT column_name as columns FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='$database'AND TABLE_NAME='$tableName'")->fetchAll(PDO::FETCH_OBJ);
     }
 
 }

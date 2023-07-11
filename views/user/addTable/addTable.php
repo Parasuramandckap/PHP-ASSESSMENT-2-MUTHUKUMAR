@@ -33,6 +33,7 @@
                 <select name="data-type[]">
                     <option>int</option>
                     <option>varchar(255)</option>
+                    <option>datetime</option>
                 </select>
             </div>
             <div id="content">

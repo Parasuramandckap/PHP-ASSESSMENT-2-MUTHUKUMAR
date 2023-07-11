@@ -23,28 +23,11 @@
                         data=JSON.parse(data)
                         data.forEach(function (table) {
                             $("#table").append('<option>'+table.tablesname+ '</option>')
-                            $("#table").addClass(`${table.TABLE_SCHEMA}`)
                         })
                     }
                 });
             })
-            //table change function
-            $("#table").change(function () {
-                let table = $("#table").val();
-                let name = $("#table").attr("class");
-                $.ajax({
-                    url: "index.php",
-                    method: "POST",
-                    data: {database:name,tbName:table},
-                    success:function (table) {
-                        console.log(table);
-                        table=JSON.parse(table)
-                        table.forEach(function (table) {
-                            console.log(table)
-                        })
-                    }
-                })
-            })
+
 
         })
 
@@ -76,5 +59,34 @@
         </div>
     <h1></h1>
     </form>
+<script type="text/javascript">
+            //table change function
+
+    $("#table").change(function () {
+        let table = $("#table").val();
+        let name = $("#db").val();
+        $.ajax({
+            url: "index.php",
+            method: "POST",
+            data:{database:name,tbName:table},
+
+        }).done(function(data) {
+            data=JSON.parse(data)
+            console.log(data);
+
+            /* 
+            I'm facing this kind of i don't know how to slove it
+            
+                    Uncaught SyntaxError: Unexpected non-whitespace character after JSON at position 54
+            at JSON.parse (<anonymous>)
+            at Object.<anonymous> (add-row:93:23)
+            at fire (jquery-3.7.0.js:3213:31)
+            at Object.fireWith [as resolveWith] (jquery-3.7.0.js:3343:7)
+            at done (jquery-3.7.0.js:9617:14)
+            at XMLHttpRequest.<anonymous> (jquery-3.7.0.js:9878:9)
+            */
+        })
+    })
+</script>
 </body>
 </html>
