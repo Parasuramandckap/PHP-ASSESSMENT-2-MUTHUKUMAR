@@ -1,5 +1,4 @@
 <?php
-require "controller/UserController.php";
 
 class Router
 {

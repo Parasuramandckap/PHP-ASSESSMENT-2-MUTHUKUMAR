@@ -1,4 +1,6 @@
 <?php
+
+
 require "models/UserModel.php";
 
 class UserController{
@@ -33,14 +35,22 @@ class UserController{
     }
     public function showRecordForm(){
 
-
         $allDB = $this->userModel->getDatabase();
         require "views/user/addRecord/addRecord.php";
 
-    }
-    public function sample(){
-        require "views/user/addRecord/addRecord.php";
-    }
 
+    }
+    public function getTable($data){
+       $getTable = $this->userModel->getTable($data);
+       echo json_encode($getTable);
+    }
+    public function getRow($insetRow){
+
+        $tableName = $insetRow['tbName'];
+        $databaseName = $insetRow["database"];
+        $tableData =  $this->userModel->getRow($databaseName,$tableName);
+        echo json_encode($tableData);
+
+    }
 
 }
